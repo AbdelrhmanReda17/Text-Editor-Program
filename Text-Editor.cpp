@@ -7,9 +7,15 @@
 #include <cstring>
 
 using namespace std;
-int mainmessage();
 
-fstream dataFile;	char name[81];
+int mainmessage();
+fstream dataFile;
+char name[81];
+
+//---------------------------------------------
+//              MAIN Function
+//---------------------------------------------
+
 int main()
 {
 	cout << "Please input a file name: ";
@@ -30,6 +36,10 @@ int main()
     system("CLS");
     mainmessage();
 }
+
+//---------------------------------------------
+//              Main Message Function
+//---------------------------------------------
 
 int mainmessage()
 {
