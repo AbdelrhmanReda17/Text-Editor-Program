@@ -65,21 +65,85 @@ void first_choice()
 void second_choice()
 {
     dataFile.open(name, ios::in);
-    cout << "\n----------------------------"<<name<< "-------------------------------\n";
-    cout << dataFile.rdbuf();
-    cout << "\n---------------------------------------------\n";
+    cout << "----------------------------"<<name<< "-------------------------------";
+    while (!dataFile.eof())
+    {
+        cout << (char)dataFile.get();
+    }
+    cout << endl <<"------------------------------------------------------------"<<endl;
     dataFile.close();
 }
 
 //---------------------------------------------
 //              Third Choice Function
 //---------------------------------------------
+
 void third_choice()
 {
-    cout << "File Cleared.\n";
     dataFile.open(name, ios::in | ios::out | ios::trunc);
-    dataFile<<" ";
     dataFile.close();
+}
+
+//---------------------------------------------
+//              Fourth Choice Function
+//---------------------------------------------
+
+void fourth_choice()
+{
+    fstream newfile;
+    char c;
+    dataFile.open(name, ios::in);
+    newfile.open("encrypt.txt", ios::out);
+    while (dataFile >> noskipws >> c)
+    {
+            int temp = (1 + c);
+            newfile << (char)temp;
+    }
+    newfile.close();
+    dataFile.close();
+    third_choice();
+
+    dataFile.open(name, ios::out);
+    newfile.open("encrypt.txt", ios::in);
+
+    while (newfile >> noskipws >> c)
+    {
+        dataFile << (char)c;
+    }
+    newfile.close();
+    dataFile.close();
+    remove("encrypt.txt");
+
+}
+
+//---------------------------------------------
+//              Fourth Choice Function
+//---------------------------------------------
+void fifth_choice()
+{
+    fstream newfile;
+    char c;
+    dataFile.open(name, ios::in);
+    newfile.open("Decrypt.txt", ios::out);
+    while (dataFile >> noskipws >> c)
+    {
+        int temp = (c - 1);
+        newfile << (char)temp;
+    }
+    newfile.close();
+    dataFile.close();
+    third_choice();
+
+    dataFile.open(name, ios::out);
+    newfile.open("Decrypt.txt", ios::in);
+    while (newfile >> noskipws >> c)
+    {
+        dataFile << (char)c;
+    }
+    newfile.close();
+    dataFile.close();
+    remove("Decrypt.txt");
+
 }
 
 //---------------------------------------------
@@ -129,7 +193,16 @@ int mainmessage()
         }
         else if (choosing == "3")
         {
+            cout << "File Cleared.\n";
             third_choice();
+        }
+        else if (choosing == "4")
+        {
+            fourth_choice();
+        }
+        else if (choosing == "5")
+        {
+            fifth_choice();
         }
         else
         {
