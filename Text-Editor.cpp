@@ -7,8 +7,8 @@
 #include <cstring>
 
 using namespace std;
-
 int mainmessage();
+
 fstream dataFile;
 char name[81];
 
@@ -18,6 +18,7 @@ char name[81];
 
 int main()
 {
+
 	cout << "Please input a file name: ";
 	cin >> name;
 	dataFile.open(name, fstream::in | fstream::out);
@@ -38,12 +39,57 @@ int main()
 }
 
 //---------------------------------------------
+//              First Choice Function
+//---------------------------------------------
+
+void first_choice()
+{
+    dataFile.open(name, ios::app);
+    char text;
+    cout << "Please type your text and finish by Ctrl+Z : ";
+	while (true)
+	{
+	    if(!cin) //CTRL+Z To close
+            break;
+        cin.get(text);
+        dataFile.put(text);
+
+	}
+    dataFile.close();
+}
+
+//---------------------------------------------
+//              Second Choice Function
+//---------------------------------------------
+
+void second_choice()
+{
+    dataFile.open(name, ios::in);
+    cout << "\n----------------------------"<<name<< "-------------------------------\n";
+    cout << dataFile.rdbuf();
+    cout << "\n---------------------------------------------\n";
+    dataFile.close();
+}
+
+//---------------------------------------------
+//              Third Choice Function
+//---------------------------------------------
+void third_choice()
+{
+    cout << "File Cleared.\n";
+    dataFile.open(name, ios::in | ios::out | ios::trunc);
+    dataFile<<" ";
+    dataFile.close();
+}
+
+//---------------------------------------------
 //              Main Message Function
 //---------------------------------------------
 
 int mainmessage()
 {
     string choosing;
+    int e;
     while(true)
     {
           cout  << "[1] Add new text to the end of the file. \n"
@@ -72,7 +118,18 @@ int mainmessage()
         }
         else if (choosing == "1")
         {
-
+            first_choice();
+            cin.clear();
+            sleep(1);
+            system("CLS");
+        }
+        else if (choosing == "2")
+        {
+            second_choice();
+        }
+        else if (choosing == "3")
+        {
+            third_choice();
         }
         else
         {
@@ -85,5 +142,3 @@ int mainmessage()
     }
 
 }
-
-
