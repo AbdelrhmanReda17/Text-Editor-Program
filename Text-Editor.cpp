@@ -31,7 +31,6 @@ void temptxt()
     }
     newfile.close();
     dataFile.close();
-
 }
 //---------------------------------------------
 //              MAIN Function
