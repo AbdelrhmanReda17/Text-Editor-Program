@@ -145,7 +145,42 @@ void fifth_choice()
     remove("Decrypt.txt");
 
 }
+//---------------------------------------------
+//              eleventh Choice Function
+//---------------------------------------------
+void eleventh_choice()
+{
+    int counter = 0;
+    string word, desiredWord;
+    vector<string> arr;
 
+    cout << "enter a word you want to count" << endl;
+    cin >> desiredWord;
+
+    dataFile.open(name, ios::in);
+    //appends words of file while it is not the end of file.
+    while (!dataFile.eof() && dataFile >> word)
+    {
+        //append words in vector "arr"
+        arr.push_back(word);
+        //ignores spaces
+        if (word == " ")
+        {
+            continue;
+        }
+    }
+    dataFile.close();
+    for (string x : arr)
+    {
+        //checks if desired word is in the vector
+        if (x == desiredWord)
+        {
+            //therfor increments the counter of how many times the desired word is repeated in file
+            counter++;
+        }
+    }
+    cout << " The word " << desiredWord << " is repeated " << counter << " times" << endl;
+}
 //---------------------------------------------
 //              Main Message Function
 //---------------------------------------------
@@ -203,6 +238,11 @@ int mainmessage()
         else if (choosing == "5")
         {
             fifth_choice();
+        }
+	    
+	else if (choosing == "11")
+        {
+            eleventh_choice();
         }
         else
         {
