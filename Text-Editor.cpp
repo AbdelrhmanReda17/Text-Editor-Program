@@ -316,16 +316,13 @@ void eleventh_choice()
         desiredWord[i] = toupper(desiredWord[i]);
     }
     newfile.open("savetext.txt", ios::in);
-    //appends words of file while it is not the end of file.
     while (!newfile.eof() && newfile >> word)
     {
         for (int i=0 ; i<word.size();i++)
         {
             word[i] = toupper(word[i]);
         }
-        //append words in vector "arr"
         arr.push_back(word);
-        //ignores spaces
         if (word == " ")
         {
             continue;
@@ -334,10 +331,8 @@ void eleventh_choice()
     newfile.close();
     for (string x : arr)
     {
-        //checks if desired word is in the vector
         if (x == desiredWord)
         {
-            //therefore increments the counter of how many times the desired word is repeated in file
             counter++;
         }
     }
@@ -419,20 +414,17 @@ void fourteenth_choice()
     string line;
     vector<char> arr(line.size());
     newfile.open("savetext.txt", ios::in | ios::out);
-    //gets lines of file while it is not the end of the file
     while(!newfile.eof())
     {
         getline(newfile,line);
         for(int i = 0 ; i<line.size();i++)
         {
-            //appends characters of line converted to lowercase to vector "arr"
             arr.push_back(tolower((char)line[i]));
         }
     }
     newfile.close();
     remove("savetext.txt");
     newfile.open("savetext.txt", ios::in | ios::out| ios::trunc);
-    //converts 1st letter of each word to uppercase
     for (int i = 0 ; i < line.size(); i++)
     {
         arr[0] = toupper(arr[0]);
@@ -442,7 +434,6 @@ void fourteenth_choice()
         }
 
     }
-    //adds characters to file
     for (char x : arr)
     {
         newfile << x;
