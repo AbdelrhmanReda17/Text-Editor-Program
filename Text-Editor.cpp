@@ -5,13 +5,12 @@
 #include <fstream>
 #include <unistd.h>
 #include <cstring>
-
+#include <cctype>
 using namespace std;
 int mainmessage();
 
 fstream dataFile;
 fstream newfile;
-string c;
 char name[81];
 
 //---------------------------------------------
@@ -19,15 +18,15 @@ char name[81];
 //---------------------------------------------
 void temptxt()
 {
+    string line;
     dataFile.open(name, ios::in);
     newfile.open("savetext.txt", ios::out | ios::trunc);
-    while(!dataFile.eof())
+    while(!dataFile.eof()&& !dataFile.fail())
     {
-        getline(dataFile,c);
-        for(int i = 0 ; i<c.size();i++)
-        {
-            newfile << char(c[i]) ;
-        }
+        getline(dataFile,line);
+        newfile << line ;
+        if(!dataFile.eof()) newfile << endl;
+
     }
     newfile.close();
     dataFile.close();
@@ -77,6 +76,8 @@ void first_choice()
 
 	}
     newfile.close();
+    sleep(1);
+    system("CLS");
 }
 
 //---------------------------------------------
@@ -93,6 +94,8 @@ void second_choice()
     }
     cout <<"\n------------------------------------------------------------\n";
     newfile.close();
+    sleep(1);
+    system("CLS");
 
 }
 
@@ -104,7 +107,8 @@ void third_choice()
 {
         newfile.open("savetext.txt", ios::in | ios::out | ios::trunc);
         newfile.close();
-
+        sleep(1);
+        system("CLS");
 }
 
 //---------------------------------------------
@@ -114,15 +118,18 @@ void third_choice()
 void fourth_choice()
 {
     fstream temp;
+    string line;
     newfile.open("savetext.txt", ios::in | ios::out);
     temp.open("encrypt.txt", ios::out);
-    while(!newfile.eof())
+    while(!newfile.eof() && !newfile.fail())
     {
-        getline(newfile,c);
-        for(int i = 0 ; i<c.size();i++)
+        getline(newfile,line);
+        for(int i = 0 ; i < line.size() ; i++)
         {
-            temp << char(c[i]+1) ;
+            temp << char(line[i]+1) ;
         }
+        if(!newfile.eof()) temp << endl;
+
     }
     temp.close();
     newfile.close();
@@ -130,33 +137,39 @@ void fourth_choice()
     temp.open("encrypt.txt", ios::in);
     while(!temp.eof())
     {
-        getline(temp,c);
-        for(int i = 0 ; i<c.size();i++)
+        getline(temp,line);
+        for(int i = 0 ; i<line.size();i++)
         {
-            newfile << char(c[i]) ;
+            newfile << char(line[i]) ;
         }
+    if(!temp.eof()) newfile << endl;
+
     }
     temp.close();
     newfile.close();
     remove("encrypt.txt");
+    sleep(1);
+    system("CLS");
 
 }
 
 //---------------------------------------------
-//              Fourth Choice Function
+//              Fifth Choice Function
 //---------------------------------------------
 void fifth_choice()
 {
     fstream temp;
+    string line;
     newfile.open("savetext.txt", ios::in);
     temp.open("Decrypt.txt", ios::out);
     while(!newfile.eof())
     {
-        getline(newfile,c);
-        for(int i = 0 ; i<c.size();i++)
+        getline(newfile,line);
+        for(int i = 0 ; i<line.size();i++)
         {
-            temp << char(c[i]-1) ;
+            temp << char(line[i]-1) ;
         }
+        if(!newfile.eof()) temp << endl;
     }
     temp.close();
     newfile.close();
@@ -166,18 +179,127 @@ void fifth_choice()
     temp.open("Decrypt.txt", ios::in);
     while(!temp.eof())
     {
-        getline(temp,c);
-        for(int i = 0 ; i<c.size();i++)
+        getline(temp,line);
+        for(int i = 0 ; i<line.size();i++)
         {
-            newfile << char(c[i]) ;
+            newfile << char(line[i]) ;
         }
+        if(!temp.eof()) newfile << endl;
+
     }
     temp.close();
     newfile.close();
     remove("Decrypt.txt");
+    sleep(1);
+    system("CLS");
 
 }
-
+//---------------------------------------------
+//              Sixth Choice Function
+//---------------------------------------------
+void sixth_choice()
+{
+    string Another;
+    fstream anotherFile;
+    cout << "Enter The Name of The Another File: ";
+    cin >> Another;
+    anotherFile.open(Another, ios::in);
+    newfile.open("savetext.txt", ios::app | ios::out);
+    while(!anotherFile.eof() && !anotherFile.fail())
+    {
+        getline(anotherFile, Another);
+        newfile << Another << endl;
+    }
+    newfile.close();
+    anotherFile.close();
+    cout << "The Two Files Are Merged Successfully, But The Changes Are Not Saved Yet! You Better Save It\n";
+    sleep(3);
+    system("CLS");
+}
+//---------------------------------------------
+//              Seventh Choice Function
+//---------------------------------------------
+void seventh_choice()
+{
+    string tmp; int counter = 0;
+    newfile.open("savetext.txt", ios::in);
+    while(!newfile.fail() && !newfile.eof())
+    {
+        newfile >> tmp;
+        counter++;
+    }
+    cout << "\nThe Number of words: " << counter << "\n\n";
+    newfile.close();
+    sleep(1);
+    system("CLS");
+}
+//---------------------------------------------
+//              eighth Choice Function
+//---------------------------------------------
+void eighth_choice()
+{
+    char tmp; int counter = 0;
+    newfile.open("savetext.txt", ios::in);
+    while(!newfile.fail() && !newfile.eof())
+    {
+        newfile.get(tmp);
+        counter++;
+    }
+    cout << "\nThe Number of Characters: " << --counter << "\n\n";
+    newfile.close();
+    sleep(1);
+    system("CLS");
+}
+//---------------------------------------------
+//              ninth Choice Function
+//---------------------------------------------
+void ninth_choice()
+{
+    string tmp; int counter = 0;
+    newfile.open("savetext.txt", ios::in);
+    while(!newfile.fail() && !newfile.eof())
+    {
+        getline(newfile, tmp);
+        counter++;
+    }
+    cout << "\nThe Number of Lines: " << counter << "\n\n";
+    newfile.close();
+    sleep(1);
+    system("CLS");
+}
+//---------------------------------------------
+//              Tenth Choice Function
+//---------------------------------------------
+inline void upper(string& s)
+{
+    for(int i =0; i < s.size(); i++)
+        s[i] = toupper(s[i]);
+}
+void tenth_choice()
+{
+    string tmp1, tmp2; bool check = false;
+    cout << "Enter The Word to look for: ";
+    cin.ignore();
+    getline(cin, tmp1);
+    upper(tmp1);
+    newfile.open("savetext.txt", ios::in);
+    while(!newfile.fail() && !newfile.eof())
+    {
+        newfile >> tmp2;
+        upper(tmp2);
+        if(tmp1 == tmp2)
+        {
+            cout << "Word Was Found In The File!\n";
+            check = true;
+            break;
+        }
+    }
+    if(!check)
+        cout << "Word Was Not Found In The File!\n";
+    sleep(1);
+    system("CLS");
+    newfile.close();
+}
 //---------------------------------------------
 //              eleventh Choice Function
 //---------------------------------------------
@@ -185,9 +307,8 @@ void fifth_choice()
 void eleventh_choice()
 {
     int counter = 0;
-    string word, desiredWord;
+    string desiredWord,word;
     vector<string> arr;
-
     cout << "enter a word you want to count" << endl;
     cin >> desiredWord;
     for (int i=0 ; i<desiredWord.size();i++)
@@ -222,6 +343,74 @@ void eleventh_choice()
     }
     cout << "The word " << desiredWord << " is repeated " << counter << " times" << endl;
 }
+//---------------------------------------------
+//              twelfth Message Function
+//---------------------------------------------
+void twelfth_choice()
+{
+    fstream temp;
+    string line;
+    newfile.open("savetext.txt", ios::in);
+    temp.open("Uppercase.txt", ios::out);
+    while(!newfile.eof())
+    {
+        getline(newfile,line);
+        for(int i = 0 ; i<line.size();i++)
+        {
+            temp << char(toupper(line[i])) ;
+        }
+        if(!newfile.eof()) temp << endl;
+    }
+    temp.close();
+    newfile.close();
+    remove("savetext.txt");
+    newfile.open("savetext.txt", ios::out | ios::trunc);
+    temp.open("Uppercase.txt", ios::in);
+    while(!temp.eof())
+    {
+        getline(temp,line);
+        newfile << line ;
+        if(!temp.eof()) newfile << endl;
+
+    }
+    temp.close();
+    newfile.close();
+    remove("Uppercase.txt");
+}
+//---------------------------------------------
+//              thirteenth Message Function
+//---------------------------------------------
+void thirteenth_choice()
+{
+    fstream temp;
+    string line;
+    newfile.open("savetext.txt", ios::in);
+    temp.open("Lowercase.txt", ios::out);
+    while(!newfile.eof())
+    {
+        getline(newfile,line);
+        for(int i = 0 ; i<line.size();i++)
+        {
+            temp << char(tolower(line[i])) ;
+        }
+        if(!newfile.eof()) temp << endl;
+    }
+    temp.close();
+    newfile.close();
+    remove("savetext.txt");
+    newfile.open("savetext.txt", ios::out | ios::trunc);
+    temp.open("Lowercase.txt", ios::in);
+    while(!temp.eof())
+    {
+        getline(temp,line);
+        newfile << line ;
+        if(!temp.eof()) newfile << endl;
+
+    }
+    temp.close();
+    newfile.close();
+    remove("Lowercase.txt");
+}
 
 //---------------------------------------------
 //              Save Function
@@ -229,6 +418,7 @@ void eleventh_choice()
 
 void save()
 {
+    string line; char newname[81];
     int choose;
     cout << "[1] Save The Changes in the Same file\n"
          << "[2] Save The Changes in Another File\n"
@@ -238,47 +428,49 @@ void save()
     {
             dataFile.open(name, ios::out);
             newfile.open("savetext.txt", ios::in );
-            while(!newfile.eof())
-            {
-                getline(newfile,c);
-                for(int i = 0 ; i<c.size();i++)
+            while(!newfile.eof()&& !newfile.fail())
                 {
-                    dataFile << char(c[i]) ;
+                    getline(newfile,line);
+                    dataFile << line ;
+                    if(!newfile.eof()) dataFile << endl;
                 }
-            }
             dataFile.close();
             newfile.close();
-            remove("savetext.txt");
     }
     else if (choose == 2)
     {
-        char newname[81];
+
         cout << "Enter The new Name: ";
         cin >> newname;
 
         dataFile.open(newname, ios::out);
         newfile.open("savetext.txt", ios::in );
-        while(!newfile.eof())
+        while(!newfile.eof() && !newfile.fail())
             {
-                getline(newfile,c);
-                for(int i = 0 ; i<c.size();i++)
-                {
-                    dataFile << char(c[i]) ;
-                }
+                getline(newfile,line);
+                dataFile << line ;
+                if(!newfile.eof()) dataFile << endl;
             }
             dataFile.close();
             newfile.close();
-            remove("savetext.txt");
 
-    }else
+    }
+    else
     {
         cout << "Wrong Choose !";
         return save();
     }
-
+    if (choose == 1) cout << "The New Changes Is Saved in Same File\n";
+    else if (choose == 2) cout << "The New Changes Is Saved to the File " << newname << endl;
+    sleep(2);
+    system("CLS");
 }
 
-
+void exit()
+{
+    cout << "See You Next Time ..." << endl;
+    remove("savetext.txt");
+}
 //---------------------------------------------
 //              Main Message Function
 //---------------------------------------------
@@ -310,7 +502,7 @@ int mainmessage()
          cin >> choosing;
         if(choosing == "16")
         {
-            cout << "See You Next Time ..." << endl;
+            exit();
             break;
         }
         else if (choosing == "1")
@@ -322,24 +514,76 @@ int mainmessage()
         }
         else if (choosing == "2")
         {
+            sleep(1);
+            system("CLS");
             second_choice();
         }
         else if (choosing == "3")
         {
+            sleep(1);
+            system("CLS");
             cout << "File Cleared.\n";
             third_choice();
         }
         else if (choosing == "4")
         {
+            sleep(1);
+            system("CLS");
             fourth_choice();
         }
         else if (choosing == "5")
         {
+            sleep(1);
+            system("CLS");
             fifth_choice();
+        }
+        else if (choosing == "6")
+        {
+            sleep(1);
+            system("CLS");
+            sixth_choice();
+        }
+        else if (choosing == "7")
+        {
+            sleep(1);
+            system("CLS");
+            seventh_choice();
+        }
+        else if (choosing == "8")
+        {
+            sleep(1);
+            system("CLS");
+            eighth_choice();
+        }
+        else if (choosing == "9")
+        {
+            sleep(1);
+            system("CLS");
+            ninth_choice();
+        }
+        else if (choosing == "10")
+        {
+            sleep(1);
+            system("CLS");
+            tenth_choice();
         }
         else if (choosing == "11")
         {
+            sleep(1);
+            system("CLS");
             eleventh_choice();
+        }
+        else if (choosing == "12")
+        {
+            sleep(1);
+            system("CLS");
+            twelfth_choice();
+        }
+        else if (choosing == "13")
+        {
+            sleep(1);
+            system("CLS");
+            thirteenth_choice();
         }
         else if (choosing == "15")
         {
