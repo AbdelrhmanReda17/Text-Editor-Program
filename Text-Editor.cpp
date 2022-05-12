@@ -412,33 +412,41 @@ void thirteenth_choice()
 void fourteenth_choice()
 {
     string line;
-    vector<char> arr(line.size());
+    string text ="";
+    fstream tmp;
     newfile.open("savetext.txt", ios::in | ios::out);
-    while(!newfile.eof())
+
+    tmp.open("save.txt", ios::in | ios::out | ios::trunc);
+    while(getline(newfile,line))
     {
-        getline(newfile,line);
         for(int i = 0 ; i<line.size();i++)
         {
-            arr.push_back(tolower((char)line[i]));
+            line[i] = (tolower((char)line[i]));
         }
-    }
-    newfile.close();
-    remove("savetext.txt");
-    newfile.open("savetext.txt", ios::in | ios::out| ios::trunc);
-    for (int i = 0 ; i < line.size(); i++)
-    {
-        arr[0] = toupper(arr[0]);
-        if (arr[i] == ' ')
+        for(int i = 0 ; i<line.size();i++)
         {
-            arr[i+1] = toupper(arr[i+1]);
-        }
+            line[0] = toupper(line[0]);
+            if (line[i] == ' ')
+            {
+                line[i+1] = toupper(line[i+1]);
+            }
 
+        }
+        tmp << line << endl;
     }
-    for (char x : arr)
-    {
-        newfile << x;
-    }
+    tmp.close();
     newfile.close();
+    newfile.open("savetext.txt", ios::out | ios::trunc);
+    tmp.open("save.txt", ios::in);
+    while(!tmp.eof())
+    {
+        getline(tmp,line);
+        newfile << line ;
+        if(!tmp.eof()) newfile << endl;
+    }
+    tmp.close();
+    newfile.close();
+    remove("save.txt");
 }
 
 //---------------------------------------------
@@ -614,9 +622,9 @@ int mainmessage()
             system("CLS");
             thirteenth_choice();
         }
-	else if (choosing == "14")
+        else if (choosing == "14")
         {
-	    sleep(1);
+            sleep(1);
             system("CLS");
             fourteenth_choice();
         }
