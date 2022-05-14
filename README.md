@@ -1,7 +1,8 @@
 # Text-Editor-Program
 ## FCAI Assignment #4 [ Program 1 ]
 
-### This Program Contain 16 Option
+### **This Program Contain 16 Option**
+
 **[1] Add new text to the end of the file <br /> 
 [2] Display the content of the file <br />
 [3] Empty the file <br />
@@ -18,6 +19,10 @@
 [14] Turn file content to 1st caps (1st char of each word is capital)  <br />
 [15] Save <br />
 [16] Exit  <br />**
+
+### **Important Notes :**
+**[1] You must include the [textlib].h and [textlib].cpp to you project file [main].**  <br />
+**[2] You must save the file after edit it.**
 
 
 
