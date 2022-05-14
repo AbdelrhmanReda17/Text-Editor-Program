@@ -1,6 +1,6 @@
 /*
 FCAI – Programming 1 – 2022 - Assignment 4
-Program Name: CS112-203-2nd–S1,2-20210255-20210376-20210436-A4-TextEditorApp.cpp 
+Program Name: CS112-203-2nd–S1,2-20210255-20210376-20210436-A4-TextEditorApp.cpp
 Program Description: Text Editor Application
 Last Modification Date: 12 / 5 / 2022.
 Author1 and ID and Group: Abdelrhman Reda Mohamed- 20210255- GROUP A
@@ -10,45 +10,11 @@ Teaching Assistant: Eng. Nesma & Eng. Yousra
 Purpose: Applying a variety edits on desired text files
  */
 
-#include <iostream>
-#include <vector>
-#include <cmath>
-#include <algorithm>
-#include <fstream>
-#include <unistd.h>
-#include <cstring>
-#include <cctype>
-using namespace std;
+#include "textlib.h"
 
+fstream newfile,dataFile;
 
-// Functions' Prototypes
-inline void upper(string& s)
-void temptxt();
-int mainmessage();
-void first_choice();
-void second_choice();
-void third_choice();
-void fourth_choice();
-void fifth_choice();
-void sixth_choice();
-void seventh_choice();
-void eighth_choice();
-void ninth_choice();
-void tenth_choice();
-void eleventh_choice();
-void twelfth_choice();
-void thirteenth_choice();
-void fourteenth_choice();
-void save();
-
-fstream dataFile;
-fstream newfile;
-char name[81];
-
-//---------------------------------------------
-//              MAIN Function
-//---------------------------------------------
-void temptxt()
+void temptxt(char name[])
 {
     string line;
     dataFile.open(name, ios::in);
@@ -62,32 +28,6 @@ void temptxt()
     }
     newfile.close();
     dataFile.close();
-}
-//---------------------------------------------
-//              MAIN Function
-//---------------------------------------------
-
-int main()
-{
-
-	cout << "Please input a file name: ";
-	cin >> name;
-	dataFile.open(name, fstream::in | fstream::out);
-	if (dataFile.fail())
-    {
-        cout << "File does not exist. Creating new file..";
-        dataFile.open(name,  fstream::in | fstream::out | fstream::trunc); // create a new file..
-        dataFile.close();
-    }
-    else
-    {
-	  cout << "This File Already Exists\n";
-        dataFile.close();
-    }
-    temptxt();
-    sleep(1);
-    system("CLS");
-    mainmessage();
 }
 
 //---------------------------------------------
@@ -116,7 +56,7 @@ void first_choice()
 //              Second Choice Function
 //---------------------------------------------
 
-void second_choice()
+void second_choice(char name[])
 {
     newfile.open("savetext.txt", ios::in);
     cout << "\n----------------------------"<<name<< "-------------------------------\n";
@@ -485,9 +425,10 @@ void fourteenth_choice()
 //              Save Function
 //---------------------------------------------
 
-void save()
+void save(char name [])
 {
-    string line; char newname[81];
+    string line;
+    char newname[81];
     int choose;
     cout << "[1] Save The Changes in the Same file\n"
          << "[2] Save The Changes in Another File\n"
@@ -514,6 +455,7 @@ void save()
 
         dataFile.open(newname, ios::out);
         newfile.open("savetext.txt", ios::in );
+        strcat(newname,".txt");
         while(!newfile.eof() && !newfile.fail())
             {
                 getline(newfile,line);
@@ -527,9 +469,9 @@ void save()
     else
     {
         cout << "Wrong Choose !";
-        return save();
+        return save(name);
     }
-    if (choose == 1) cout << "The New Changes Is Saved in Same File\n";
+    if (choose == 1) cout << "The New Changes Is Saved in Same File [" << name << "]"<< endl;
     else if (choose == 2) cout << "The New Changes Is Saved to the File " << newname << endl;
     sleep(2);
     system("CLS");
@@ -544,10 +486,10 @@ void exit()
 //              Main Message Function
 //---------------------------------------------
 
-int mainmessage()
+int mainmessage(char name[])
 {
     string choosing;
-    int e;
+    //int e;
     while(true)
     {
           cout  << "[1] Add new text to the end of the file. \n"
@@ -585,7 +527,7 @@ int mainmessage()
         {
             sleep(1);
             system("CLS");
-            second_choice();
+            second_choice(name);
         }
         else if (choosing == "3")
         {
@@ -662,14 +604,14 @@ int mainmessage()
         }
         else if (choosing == "15")
         {
-            save();
+            save(name);
         }
         else
         {
             sleep(1);
             system("CLS");
             cout << "Wrong Choose !!" << endl;
-            return mainmessage();
+            return mainmessage(name);
         }
 
     }
