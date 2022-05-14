@@ -1,7 +1,7 @@
 # Text-Editor-Program
 ## FCAI Assignment #4 [ Program 1 ]
 
-### This Program Contain 12 Option
+### This Program Contain 16 Option
 **[1] Add new text to the end of the file <br /> 
 [2] Display the content of the file <br />
 [3] Empty the file <br />
