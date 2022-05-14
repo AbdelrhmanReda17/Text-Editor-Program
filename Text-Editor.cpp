@@ -19,7 +19,27 @@ Purpose: Applying a variety edits on desired text files
 #include <cstring>
 #include <cctype>
 using namespace std;
+
+
+// Functions' Prototypes
+inline void upper(string& s)
+void temptxt();
 int mainmessage();
+void first_choice();
+void second_choice();
+void third_choice();
+void fourth_choice();
+void fifth_choice();
+void sixth_choice();
+void seventh_choice();
+void eighth_choice();
+void ninth_choice();
+void tenth_choice();
+void eleventh_choice();
+void twelfth_choice();
+void thirteenth_choice();
+void fourteenth_choice();
+void save();
 
 fstream dataFile;
 fstream newfile;
