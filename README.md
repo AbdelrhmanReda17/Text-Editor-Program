@@ -1,7 +1,7 @@
 # Text-Editor-Program
 ## FCAI Assignment #4 [ Program 1 ]
 
-### **This Program Contain 16 Option**
+### **This Program Contain 16 Options:**
 
 **[1] Add new text to the end of the file <br /> 
 [2] Display the content of the file <br />
@@ -20,9 +20,12 @@
 [15] Save <br />
 [16] Exit  <br />**
 
-### **Important Notes :**
+## **Additional Info:**
 **[1] You must include the [textlib].h and [textlib].cpp to you project file [main].**  <br />
 **[2] You must save the file after edit it.**
 
 
 
+## Functions Diagram :
+
+![image](https://user-images.githubusercontent.com/90706154/168471630-7655fe8c-c55b-4fbf-a1d6-f35abbc957ee.png)
