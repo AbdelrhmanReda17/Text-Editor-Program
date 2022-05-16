@@ -1,4 +1,6 @@
-# Text-Editor-Program
+<h1 align="Center" > Text-Editor-Program </h1>
+
+
 ## FCAI Assignment #4 [ Program 1 ]
 
 ### **This Program Contain 16 Options:**
