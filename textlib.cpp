@@ -171,16 +171,18 @@ void fifth_choice()
 //---------------------------------------------
 void sixth_choice()
 {
-    string Another;
+    string line;
+    char Another[81];
     fstream anotherFile;
     cout << "Enter The Name of The Another File: ";
     cin >> Another;
+    strcat(Another,".txt");
     anotherFile.open(Another, ios::in);
     newfile.open("savetext.txt", ios::app | ios::out);
     while(!anotherFile.eof() && !anotherFile.fail())
     {
-        getline(anotherFile, Another);
-        newfile << Another << endl;
+        getline(anotherFile, line);
+        newfile << line << endl;
     }
     newfile.close();
     anotherFile.close();
